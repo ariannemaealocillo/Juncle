@@ -1,0 +1,104 @@
+/* backdrop start */
+.body-background {
+    background-color: #E9F9F1;
+}
+/* backdrop end */
+
+
+
+/* Header start */
+.header {
+    top: 0;
+    position: fixed;
+    height: 8vh;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.header_logo_icon {
+    height: 6vh;
+}
+
+.header_logo_word {
+    color: #235E0E;
+}
+
+.header_icon_notification {
+    height: 3vh;
+}
+
+.header-nav {
+    min-width: 40vh;
+}
+
+.profile-text-header {
+    font-size: 12px;
+}
+
+#logout {
+    text-decoration: none; 
+}
+/* header end */
+
+
+
+/* Navbar start */
+.navbar_section {
+    height: 100%;
+    width: 245px;
+    position: fixed;
+    background-image: linear-gradient(#1BAE96, #91C74A);
+}
+/* Navbar end */
+
+
+
+/* Main body start */
+.main_container {
+    margin-top: 8vh;
+    max-width: 100%;
+}
+
+.column-display-wrapper {
+    height: 89vh;
+}
+/* Main body end */
+
+
+
+/* InputFields start */
+.search_field {
+    border: none;
+}
+
+.search_field:focus{
+    outline: none;
+}
+/* InputFields end */
+
+
+
+/* Components start */
+.search-bar-container {
+    border: 1px solid rgb(135, 135, 135);
+}
+/* Components end */
+
+
+/* Assets starts*/
+.search-icon {
+    height: 3vh;
+}
+
+.action-list-icon {
+    height: 2vh;
+}
+/* Assets end */
+
+
+
+/* Text start */
+.text-sm {
+    font-size: 14px;
+}
+/* text end */
