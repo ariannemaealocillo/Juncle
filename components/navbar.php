@@ -10,7 +10,9 @@
 </head>
 <body>
     <section class="navbar_section">
-        <div class="w-100">asdasdasd</div>
+        <div class="w-100">
+            
+        </div>
     </section>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

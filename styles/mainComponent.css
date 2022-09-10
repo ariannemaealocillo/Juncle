@@ -1,3 +1,36 @@
+/* Webkit scrollbar start*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #ccc;  
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;  
+}
+/* Webkit scrollbar end */
+
+
+
 /* backdrop start */
 .body-background {
     background-color: #E9F9F1;
@@ -82,6 +115,21 @@
 .search-bar-container {
     border: 1px solid rgb(135, 135, 135);
 }
+
+.scrollbar {
+    overflow: hidden;
+    overflow-y: auto;
+    height: 79vh;
+}
+
+.schedule-record:hover {
+    background-color: #f1faf5;
+}
+
+.status-wrapper {
+    border-radius: 50px;
+    background-color: #BDE7BD;
+}
 /* Components end */
 
 
@@ -93,6 +141,12 @@
 .action-list-icon {
     height: 2vh;
 }
+
+.item-image-wrapper {
+    min-height: 211px;
+    min-width: 305px;
+    background-color: #999;
+}
 /* Assets end */
 
 
@@ -100,5 +154,9 @@
 /* Text start */
 .text-sm {
     font-size: 14px;
+}
+
+.info-value {
+    text-align: left;
 }
 /* text end */
