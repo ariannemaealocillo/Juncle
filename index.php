@@ -17,47 +17,7 @@
 
 
 </head>
-<script>
-  
-$(document).ready(function() {
-    $("#submitbutton").click(function() {
-        
-        if ($("#username").val() == "") {
-            $("#result_display").html("Your username is empty.");
-        } else if ($("#password").val() == "") {
-            $("#result_display").html("Your password is empty.");
-        } else {
-            $.ajax({
-                url: 'functions/authenticate_user.php',
-                type: 'post',
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                },
-                success: function(result) {
-                    
-                    if (result.toString() == "") {
-                        
-                        $("#result_display").html("Invalid credentials. Please try again.");
-                       
-                    } else {
-                        alert("Ifail!");
-                        $("#result_display").html(result.toString());
-                        
-                    }
-                
-                },
-                error: function(result) {
-        alert('error');
-      }
-                
-            });
-        }
 
-    });
-});
-
-</script>
 <body>
     <script>
     checkUserIsSignedIn();
@@ -79,6 +39,11 @@ $(document).ready(function() {
          <br>
          <h3 style="font-size: 20px;font-family: Arial; text-align: center; letter-spacing: 0.3px;" >Log In to Dashboard</h3>
         <p style = "color: #9FA2B4;font-size: 11px;text-align: center; letter-spacing: 0.2px;">Enter your Username and Pzassword below</p>
+
+
+        <div class="results_container">
+            <p style ="color:red;" class="result_display" id="result_display"> </p>
+        </div>
          <form class="login_form" method="post">
             <div>
             <label style="float:left;text-transform: uppercase; font-weight: 700;font-size: 12px;line-height: 15px;color: #9FA2B4;">Username </label>
@@ -95,10 +60,12 @@ $(document).ready(function() {
             <br>
             <input type="password" style="float:left;padding-left:15px;" class="inputbox" name ="password" id="password" placeholder="Password">
         
-            <input type="submit" class="button" id="submitbutton" name="submitbutton" style="margin-top:30px;border:none">
+            <input type="button" class="button" id="submitbutton" name="submitbutton" value="Login" style="margin-top:30px;border:none">
         </div>
         <br>
         <p class="donthave">Don’t have an account? <label style="color:#3751FF;">Sign up</label></p>
+
+        
         </form>
         <div>
         <!-- end div box -->
@@ -107,5 +74,47 @@ $(document).ready(function() {
 
 
 </body>
+<!-- javascript -->
+<script>
+$(document).ready(function() {
+    $("#submitbutton").click(function() {
+        
+        if ($("#username").val() == "") {
+           
+            $("#result_display").html("Your username is empty.");
+        } else if ($("#password").val() == "") {
+            $("#result_display").html("Your password is empty.");
+        }else {
+            $.ajax({
+                url: 'functions/authenticate_user.php',
+                type: 'post',
+                data: {
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                },
+                success: function(result) {
+                    if (result.toString() == "") {
+                        $("#result_display").html("Invalid credentials. Please try again.");
+                        alert("Invalid Credentials")
+                    } else {
 
+                        $("#result_display").html(result.toString());
+                        
+                    }
+
+                }
+            });
+        }
+
+    });
+});
+function checkUserIsSignedIn() {
+    if (localStorage.getItem("username") === null) {
+        //Do nothing since the user is not yet authenticated
+    } else {
+        
+        window.location.href = "admin_dashboard.php";
+    }
+}
+</script>
 </html>
