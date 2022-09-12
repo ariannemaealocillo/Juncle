@@ -1,7 +1,7 @@
 <?php
 session_start();
 //----> Database Connection Credentials
-require 'database.php';
+require '../database.php';
 
 
 
@@ -13,6 +13,7 @@ $Password = "";
 if(isset($_POST['username']) AND isset($_POST['password'])){
     $Username = $_POST['username'];
     $Password = $_POST['password'];
+    
 }else{
     echo "No credentials submitted.";
     ?>
@@ -32,8 +33,9 @@ while($row = mysqli_fetch_array($run_query)){
         echo "Logging in...";
     
     $_SESSION["username"] = $row['user_name'];
-    header("Location:dashboard.php")
+    
     ?>
+    <meta http-equiv="refresh" content="0; url=admin_dashboard.php" />
 <script>
 //LocalStorage Data for User Credentials
 localStorage.setItem("username", "<?php echo $row['user_name']?>");
@@ -43,8 +45,10 @@ localStorage.setItem("username", "<?php echo $row['user_name']?>");
 
 <?php
 break;
-    }else{
-  
+    }else{?>
+
+        </script>Invalid Credentials. Please try again!</script>
+    <?php
     }
 }
 
