@@ -78,10 +78,33 @@ input[type=number] {
 /* Navbar start */
 .navbar_section {
     height: 100%;
-    width: 245px;
-    position: fixed;
-    background-image: linear-gradient(#1BAE96, #91C74A);
+    width: 240px;
+    top: 0;
+    padding-top: 1px;
+    /* background-image: linear-gradient(#1BAE96, #91C74A); */
+    z-index: -1;
+    background-color: #fff;
 }
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link:hover {
+    color: black;
+    background-color: #E9F9F1;
+}
+
+.active_nav_item {
+    background-color: #E9F9F1;
+}
+
+.inActive_nav_item {
+    background-color: #fff;
+}
+
+
 /* Navbar end */
 
 
@@ -116,10 +139,16 @@ input[type=number] {
     border: 1px solid rgb(135, 135, 135);
 }
 
-.scrollbar {
+.scrollbarContent {
     overflow: hidden;
     overflow-y: auto;
     height: 79vh;
+}
+
+.scrollbarSchedule {
+    overflow: hidden;
+    overflow-y: auto;
+    height: 66vh;
 }
 
 .schedule-record:hover {
@@ -133,7 +162,7 @@ input[type=number] {
 /* Components end */
 
 
-/* Assets starts*/
+/* Assets start*/
 .search-icon {
     height: 3vh;
 }
@@ -159,4 +188,5 @@ input[type=number] {
 .info-value {
     text-align: left;
 }
+
 /* text end */
