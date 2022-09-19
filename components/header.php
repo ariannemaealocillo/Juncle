@@ -1,3 +1,7 @@
+<?php
+    require 'database.php';
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +24,11 @@
                 <div class="profile_header d-flex justify-content-between align-items-center">
                     <img class="header_logo_icon me-1" src="assets/image_placeholder.svg">
                     <div class="profile_desc">
-                        <p class="profile-text-header mb-0 fw-bold">User98765432</p>
+                        <p class="profile-text-header mb-0 fw-bold"><?php echo $_SESSION['username'] ?></p>
                         <p class="profile-text-header mb-0">Admin/Moderator</p>
                     </div>
                 </div>
-                <a href="" id="logout" class="me-2">Sign out</a>
+                <a id="logout" class="me-2">Sign out</a>
             </div>
         </div>
     </section>
@@ -33,8 +37,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $('#logout').click(function() {
-        alert("hi");
-        // $(this).addClass('active_nav_item');
+       
+        console.log("User logged out.");
+        localStorage.clear();
+        window.location.href = "index.php";
     });
 </script>
 

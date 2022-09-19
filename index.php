@@ -19,9 +19,7 @@
 </head>
 
 <body>
-    <script>
-    checkUserIsSignedIn();
-    </script>
+   
     <div class ="container" style="display:flex;" >
     <div style= "width:70%;">
     <center>
@@ -108,13 +106,6 @@ $(document).ready(function() {
 
     });
 });
-function checkUserIsSignedIn() {
-    if (localStorage.getItem("username") === null) {
-        //Do nothing since the user is not yet authenticated
-    } else {
-        
-        window.location.href = "admin_dashboard.php";
-    }
-}
+
 </script>
 </html>

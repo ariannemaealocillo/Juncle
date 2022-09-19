@@ -1,3 +1,7 @@
+<?php 
+    require 'database.php'; 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,22 @@
     <link rel="stylesheet" href="/styles/mainComponent.css">
     <title>Dashboard</title>
 </head>
+<script>
+    function checkUserIsSignedIn() {
+    if (localStorage.getItem("username") === null) {
+        window.location.href = "index.php";
+       
+    } else {
+        //Do nothing since the user is not yet authenticated
+
+    }
+}
+</script>
+<script>
+    checkUserIsSignedIn();
+    </script>
 <body class="body-background">
+    
     <?php
         include('components/header.php');
     ?>
@@ -55,490 +74,67 @@
                     <div class="schedule-list">
                         <div class="month-separator w-100">
                             <p class="month-display text-sm text-center fw-bold text-muted">April 2022</p>
-                            <div class="month-schedule-list">
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="month-schedule-list">
+                                    
+                                
+                                    <!-- Query Data -->
+                            <?php
+                            $query = "select * from booking inner join booking_schedule on booking.schedule_id = booking_schedule.schedule_id inner join approved_scrap on booking.booking_id = approved_scrap.booking_id";  
+                            $run_query = mysqli_query($connection,$query);
+                            $return_request_from_run_query = mysqli_num_rows($run_query) > 0;
+                            ?>
+
+
+                            <?php
+                            while($row = mysqli_fetch_array($run_query)){
+                                ?>
 
                                 <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
+                                        <div class="card-info">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
+                                                    <p class="label-text fw-bold mb-0">
+                                                        Tracking Number :
+                                                    </p>
+                                                    <p class="info-value strong ms-2 mb-0">
+                                                        <?php echo $row['booking_id'];?>
+                                                    </p>
                                                 </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
+                                                <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
                                             </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
+                                            <div class="d-flex align-items-center mt-1">
+                                                <div class="scrap-wrapper d-flex justify-content-between align-items-center">
+                                                    <p class="label-text fw-bold mb-0">
+                                                        Scrap :
+                                                    </p>
+                                                    <p class="text-muted ms-2 mb-0">
+                                                         <?php echo $row['scrap_type'];?>
+                                                    </p>
+                                                </div>
+                                                <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
+                                                    <p class="label-text fw-bold mb-0">
+                                                        Kg(s) :
+                                                    </p>
+                                                    <p class="text-muted ms-2 mb-0">
+                                                         <?php echo $row['scrap_weight'];?>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center mt-3">
+                                                    <div class="status-wrapper px-2 py-1 shadow-sm">
+                                                        <p class="text-muted fw-bold m-0 text-sm">Processing</p>
+                                                    </div>
+                                                    <p class="text-sm mx-2 m-0 fst-italic">as of</p>
+                                                    <p class="text-sm m-0 fst-italic fw-bold">  <?php echo $row['date_recieved'];?></p>
+                                                </div>
+                                                <button class="btn btn-outline-secondary btn-sm">View Record</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="schedule-record p-3 rounded shadow-sm mb-3">
-                                    <div class="card-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="trackingNo-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Tracking Number :
-                                                </p>
-                                                <p class="info-value strong ms-2 mb-0">
-                                                    123456789
-                                                </p>
-                                            </div>
-                                            <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
-                                        </div>
-                                        <div class="d-flex align-items-center mt-1">
-                                            <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Scrap :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    Plastic
-                                                </p>
-                                            </div>
-                                            <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
-                                                <p class="label-text fw-bold mb-0">
-                                                    Kg(s) :
-                                                </p>
-                                                <p class="text-muted ms-2 mb-0">
-                                                    (Conditional)
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center mt-3">
-                                                <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                    <p class="text-muted fw-bold m-0 text-sm">Processing</p>
-                                                </div>
-                                                <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
-                                            </div>
-                                            <button class="btn btn-outline-secondary btn-sm">View Record</button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <?php
+                        }
+                                    ?>
                             </div>
                         </div>
                     </div>
