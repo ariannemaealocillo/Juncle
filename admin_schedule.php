@@ -21,7 +21,6 @@
         <div class="col-7">
             <div class="column-display-wrapper bg-white mx-1 my-2 w-100 p-3 rounded shadow-sm">
                 <h3>Schedule</h3>
-                <div class="scrollbar pe-2">
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="search-bar-container bg-white d-flex align-items-center p-1 rounded shadow-sm">
@@ -52,6 +51,7 @@
                         </div>
                     </div>
                     <hr class="mt-4">
+                    <div class="scrollbarSchedule pe-2">
                     <div class="schedule-list">
                         <div class="month-separator w-100">
                             <p class="month-display text-sm text-center fw-bold text-muted">April 2022</p>
@@ -551,7 +551,7 @@
                     <p class="fs-4 text-muted m-0">Content Board</p>
                     <img class="search-icon me-1" src="assets/edit.svg">
                 </div>
-                <div class="scrollbar pe-3">
+                <div class="scrollbarContent pe-3">
                     <div class="trackingNo-wrapper mt-4 d-flex align-items-center">
                         <p class="label-text fw-bold mb-0 text-sm">
                             Tracking Number :
@@ -617,4 +617,16 @@
     </section>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        $("#scheduleWrap").addClass('active_nav_item').removeClass('inActive_nav_item');
+        $("#dashboardWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+        $("#userWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+        $("#rfWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+        $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+    })
+    
+</script>
 </html>
