@@ -114,7 +114,70 @@
                             ,'<?php echo $row['admin_email'];?>', '<?php echo $row['admin_username'];?>',
                             '<?php echo $row['admin_password'];?>'
                             ,'<?php echo $row['admin_type'];?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button>
-                          
+                        
+                         <?php if($row['suspend_status']=='0'){?> 
+                          <button onclick="suspend(<?php echo $row['admin_id']; ?>)" class="w3-button w3-red btn-sm" style ="border-radius:5px;"> Suspend</button>
+                    
+                         
+                            <?php } else if($row['suspend_status']=='1') { ?>
+                          <button onclick="activate(<?php echo $row['admin_id'];?>)" class="w3-button w3-green btn-sm" style ="border-radius:5px;"> Activate</button>
+                                <?php } ?>
+                       
+                                <script>
+                                function suspend(admin){
+                                   
+                                    $.ajax({
+                                                        url: 'functions/suspend.php',
+                                                        type: 'POST',
+                                                        data: {
+
+                                                            suspend_admin_id: admin,
+                                                           
+                                                        },
+                                                        success: function(result) {
+                                                            alert("Successfully Suspended a record!");
+                                                            console.log("Successfully suspended a record.");
+                                                            console.log(admin);
+                                                           
+                                                            //display loader
+                                                            window.location.href = "admin_usermanagement.php";
+                                                        
+                                                        },
+                                                        error: function(data) {
+                                                            alert("error occured" + data); //===Show Error Message====
+
+                                                        }
+
+                                                    });
+                                }
+                                function activate(admin){
+                                   
+                                   $.ajax({
+                                                       url: 'functions/activate.php',
+                                                       type: 'POST',
+                                                       data: {
+
+                                                        activate_admin_id: admin,
+                                                          
+                                                       },
+                                                       success: function(result) {
+                                                           alert("Successfully Activated a record!");
+                                                           console.log("Successfully Activated a record.");
+                                                           console.log(admin);
+                                                          
+                                                           //display loader
+                                                           window.location.href = "admin_usermanagement.php";
+                                                       
+                                                       },
+                                                       error: function(data) {
+                                                           alert("error occured" + data); //===Show Error Message====
+
+                                                       }
+
+                                                   });
+                               }
+                                </script>
+
                                 <div id="id01" class="w3-modal">
                                 <div class="w3-modal-content w3-animate-bottom" style="width:20%;" >
                                   <!-- start edit modal -->
@@ -165,16 +228,12 @@
                                     <label >Account Type</label><br>
                                     <select style = "width: 100%;" name = "admin_type_selector" id="admin_type_selector"  onchange="edit_admin_type()" disabled>
                                     
-                                        <option value = "2">Collector Admin</option>
-                                        <option value = "1">Super Admin</option>
+                                        <option value = "1">Collector Admin</option>
+                                        <option value = "2">Super Admin</option>
                                 
                                    </select>
 
-                                   
-
-                                  
-                                   
-
+                
                                     <input type="text" class="edit_admin_type" id="edit_admin_type" minlength="3" maxlength="50"
                                         name="edit_admin_type" 
                                         style="border: none;margin: 10 0 10 0;width: 100%;font-size: 1.2rem;border: 1px solid #ADADAD;font-weight: normal;padding: 5px 0px 5px 10px;display: none;" />
@@ -357,8 +416,8 @@
                             
                                     <label>Role</label><br>
                                     <select name ="add_role" id= "add_role" style="border-radius:5px; width:100%; ">
-                                        <option value = "2">Collector Admin</option>
-                                        <option value = "1">Super Admin</option>
+                                        <option value = "1">Collector Admin</option>
+                                        <option value = "2">Super Admin</option>
                                     
                         </select>
                         <br>
@@ -546,7 +605,7 @@ function opendetails(admin_id, admin_first_name, admin_last_name, admin_email, a
     document.getElementById("edit_email").value = admin_email;
     document.getElementById("edit_username").value = admin_username;
     document.getElementById("edit_password").value = admin_password;
-d
+
     for (let k = 0; admin_type_edit_options.length; k++) {
         if (admin_type_edit_options[k].value == admin_type) {
             document.getElementById("admin_type_selector").value = admin_type_edit_options[k].value;
