@@ -40,16 +40,16 @@
             ?>
         </div>
         
-        <div class="col-3" style="padding-left:50px;">
+        <div class="col-3" style="padding-left:50px; height:1000px;">
           <!-- ari imo code -->
      
-            <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px;">
+            <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px; height:70%; overflow-y: scroll;">
             <div style="display:flex;">
             <h1 class=" float-start section title" style="flex:50%;padding-left: 5px;">User Management</h1>
         
             <button onclick="document.getElementById('add_modal').style.display='block'" class="btn btn-primary btn-sm" style="padding-left: 5px; margin-top:2%;float:right; height :50%; margin-right:3%;">+ Add New User</button>
             </div>
-            <table name="admin_table" id="admin_table" class="table table-hover" >
+            <table name="admin_table" id="admin_table" class="table table-hover table-responsive"  >
             <thead>
                 <tr>
                    
@@ -77,7 +77,7 @@
 
                     <?php 
                     if($row['admin_type'] == 1){
-                        $user_role = "Admin Collector";
+                        $user_role = " Collector";
                     }
                     else if($row['admin_type'] == 2){
                         $user_role = "Super Admin";
@@ -228,7 +228,7 @@
                                     <label >Account Type</label><br>
                                     <select style = "width: 100%;" name = "admin_type_selector" id="admin_type_selector"  onchange="edit_admin_type()" disabled>
                                     
-                                        <option value = "1">Collector Admin</option>
+                                        <option value = "1">Collector </option>
                                         <option value = "2">Super Admin</option>
                                 
                                    </select>
@@ -416,7 +416,7 @@
                             
                                     <label>Role</label><br>
                                     <select name ="add_role" id= "add_role" style="border-radius:5px; width:100%; ">
-                                        <option value = "1">Collector Admin</option>
+                                        <option value = "1">Collector </option>
                                         <option value = "2">Super Admin</option>
                                     
                         </select>
