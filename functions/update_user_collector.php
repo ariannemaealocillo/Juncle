@@ -5,12 +5,14 @@ session_start();
 require '../database.php';
 //LIVE ARRAY TO USE
 $post_params_field_array = array(
-     "edit_admin_fname",//0
-     "edit_admin_lname",//1
-     "edit_admin_email",//2
-     "edit_admin_username",//3
-     "edit_admin_password",//4
-     "edit_admin_id"//5
+     "edit_id",//0
+     "edit_fname",//1
+     "edit_mname",//2
+     "edit_lname",//3
+     "edit_email",//4
+     "edit_address",//5
+     "edit_password",//6
+     "edit_plate_number"//7
      );
      ?>
 <script>
@@ -44,12 +46,9 @@ alert($post_params_field_array_data_value[6]);
 }
 
 
-
-
-
-$query = "UPDATE admin
-SET admin_first_name = '".$post_params_field_array_data_value[0]."', admin_last_name = '".$post_params_field_array_data_value[1]."',
-admin_email = '".$post_params_field_array_data_value[2]."', admin_username = '".$post_params_field_array_data_value[3]."', admin_password ='".$post_params_field_array_data_value[4]."' WHERE admin_id = '".$post_params_field_array_data_value[5]."';";
+$query = "UPDATE collector
+SET collector_firstname = '".$post_params_field_array_data_value[1]."', collector_middlename = '".$post_params_field_array_data_value[2]."', collector_lastname = '".$post_params_field_array_data_value[3]."',
+collector_email = '".$post_params_field_array_data_value[4]."', collector_address = '".$post_params_field_array_data_value[5]."', password ='".$post_params_field_array_data_value[6]."', plate_number = '".$post_params_field_array_data_value[7]."' WHERE collector_id = '".$post_params_field_array_data_value[0]."';";
 $query_run = mysqli_query($connection, $query);
 // header("Location: ../admin_usermanagement.php");
 
