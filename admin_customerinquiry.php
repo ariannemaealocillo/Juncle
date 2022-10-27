@@ -41,6 +41,80 @@ g<?php
         
         <div class="col-3" style="padding-left:50px;">
             <!-- ari imo code -->
+            <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px;">
+            <h1 class="section title" style="padding-left: 5px;">Customer Inquiry</h1>
+            <table class="table table-hover" >
+            <thead>
+                <tr>
+                    <th scope="col">Inquiry No.</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <?php
+            $query = "select * from inquiry inner join user on user.user_id = inquiry.user_id";
+                             $query_run = mysqli_query($connection, $query);       
+
+                        
+                             while($row = mysqli_fetch_array($query_run)){
+                              
+                          
+                            ?>
+                <tr>
+                    <td><?php echo $row['inquiry_id']; ?></td>
+                    <td><?php echo $row['user_id']; ?></td>
+                    <td><?php echo $row['user_first_name']." ".$row['user_last_name']; ?></td>
+                    <td><?php echo $row['user_email']; ?></td>
+                    <td><?php echo $row['date_created'];?></td>
+                    <td>
+                    <div class="w3-container">
+                            <button data-target="#customer_inquiry_modal" onclick="display_data('<?php echo $row['subject']?>','<?php echo $row['description']?>')" data-toggle="modal" class="w3-button w3-green">View Inquiry</button>
+                            <div class="modal fade center" id="customer_inquiry_modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Message</h5>
+                                            <button type="button" class="close closeModalButton" data-dismiss="modal">
+                                            <span>&times;</span>
+                                            </button>
+                                        </div>
+                                             <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="subject" class="col-form-label">Subject:</label>
+                                                        <input type="text" id="subject"  disabled>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message" class="col-form-label">Message:</label>
+                                                        <textarea class="form-control" id="message-text" disabled></textarea>
+                                                    </div>
+                                                 </form>
+                                             </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                    </td>
+                </tr>
+                <?php 
+                             }
+                ?>
+               <script>
+                    function display_data(subject, description){
+                        document.getElementById('subject').value = subject;
+                        document.getElementById('message-text').value = description;
+                    }
+                </script>
+                </tbody>
+            </table>
+            </div>
         </div>
         </section>
 </body>
