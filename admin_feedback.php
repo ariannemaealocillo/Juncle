@@ -1,7 +1,7 @@
-g<?php 
+<!--<?php 
     require 'database.php'; 
     session_start();
-?>
+?>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,89 +43,22 @@ g<?php
             <!-- ari imo code -->
             <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px;">
             <h1 class="section title" style="padding-left: 5px;">Customer Feedback</h1>
-            <table class="table table-hover" >
-            <thead>
-                <tr>
-                    <th scope="col">Rating ID</th>
-                    <th scope="col">Booking ID</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col">Feedback</th>
-                    <th scope="col">Rating Date</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <?php
-            $query = "select * from rating inner join booking on booking.booking_id = rating.booking_id";
-                             $query_run = mysqli_query($connection, $query);       
-
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="search-bar-container bg-white d-flex align-items-center p-1 rounded shadow-sm">
+                                <img class="search-icon me-1" src="assets/search_icon.svg">
+                                <input class="search_field p-0" id="searchBarFilter" type="text" placeholder="Search">
+                            </div>
+                            
+                        </div>
                         
-                             while($row = mysqli_fetch_array($query_run)){
-                              
-                          
-                            ?>
-                <tr>
-                    <td><?php echo $row['rating_id']; ?></td>
-                    <td><?php echo $row['booking_id']; ?></td>
-                    <td><?php echo $row['rating']; ?></td>
-                    <td><?php echo $row['feedback']; ?></td>
-                    <td><?php echo $row['rating_date'];?></td>
-                    <td>
-                    <div class="w3-container">
-                            <button data-target="#customer_inquiry_modal" onclick="display_data('<?php echo $row['subject']?>','<?php echo $row['description']?>')" data-toggle="modal" class="w3-button w3-green">View Details</button>
-                            <div class="modal fade center" id="customer_inquiry_modal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5>Feedback</h5>
-                                            <button type="button" class="close closeModalButton" data-dismiss="modal">
-                                            <span>&times;</span>
-                                            </button>
-                                        </div>
-                                             <div class="modal-body">
-                                                <form>
-                                                    <div class="mb-3">
-                                                        <label for="subject" class="col-form-label">Name:</label>
-                                                        <input type="text" id="subject"  disabled>
-                                                        <label for="subject" class="col-form-label">ID:</label>
-                                                        <input type="number" id="subject"  disabled>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="subject" class="col-form-label">Email:</label>
-                                                        <input type="email" id="subject"  disabled>
-                                                    </div>
-                                                    <div class="mb-1">
-                                                        <label for="subject" class="col-form-label">Date Created:</label>
-                                                        <input type="date" id="subject"  disabled>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="mb-3">
-                                                        <label for="message" class="col-form-label">Feedback:</label>
-                                                        <textarea class="form-control" id="message-text" disabled></textarea>
-                                                    </div>
-                                                 </form>
-                                             </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                </div>
+                    </div>
+                    
+            <div id="searchresult">
 
-                                            </div>
-                                        </div>
-                                    </div> 
-                    </td>
-                </tr>
-                <?php 
-                             }
-                ?>
-               <script>
-                    function display_data(subject, description){
-                        document.getElementById('subject').value = subject;
-                        document.getElementById('message-text').value = description;
-                    }
-                </script>
-                </tbody>
-            </table>
+            </div>
+
+            
             </div>
         </div>
         </section>
@@ -133,6 +66,30 @@ g<?php
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#searchBarFilter").keyup(function(){
+            var input = $(this).val();
+            //alert(input);
+
+            if(input != ""){
+                $.ajax({
+                    url: "api/feedback_search.php",
+                    method: "POST",
+                    data:{input:input},
+
+                    success:function(data){
+                        $("#searchresult").html(data);
+                        $("#searchresult").css("display","block");
+                    }
+                });
+            }else{
+                $("#searchresult").css("display","none");
+            }
+            
+        });
+    });
+
 
 </script>
 </html>
