@@ -2,15 +2,17 @@
 session_start();
 
 //----> Database Connection Credentials
-require '../database.php';
+require 'database.php';
 //LIVE ARRAY TO USE
 $post_params_field_array = array(
-     "admin_fname",//0
-     "admin_lname",//1
-     "admin_email",//2
-     "admin_username",//3
-     "admin_password",//4
-     //6
+     "hoa_fname",//0
+     "hoa_lname",//1
+     "email_hoa",//2
+     "tele_hoa",//3
+     "cont",//4
+     "usern", //5
+     "pw", //6
+ 
      );
      ?>
 <script>
@@ -45,12 +47,12 @@ console.log('Admin Value: ' + "<?php echo $_POST[(String)$post_params_field_arra
 
 
 
-$query_push_new_admin = "insert into admin( admin_first_name, admin_last_name, admin_email, admin_username, admin_password, deleted_status, suspend_status) values (
+$query_push_new_admin = "insert into user( user_first_name, user_last_name, user_email, user_telephone, user_contact_number, user_name, user_password, status) values (
 '".$post_params_field_array_data_value[0]."','".$post_params_field_array_data_value[1]."','".$post_params_field_array_data_value[2]."',
-'".$post_params_field_array_data_value[3]."', '".$post_params_field_array_data_value[4]."', '0','0')";
+'".$post_params_field_array_data_value[3]."', '".$post_params_field_array_data_value[4]."', '".$post_params_field_array_data_value[5]."' , '".$post_params_field_array_data_value[6]."','0' )";
 
 $query_run = mysqli_query($connection, $query_push_new_admin);
-header("Location: ../admin_usermanagement.php");
+// header("Location: ../admin_usermanagement.php");
 
 
 

@@ -51,7 +51,7 @@ $query_push_new_collector = "insert into collector( collector_firstname, collect
 '".$post_params_field_array_data_value[3]."', '".$post_params_field_array_data_value[4]."', '1234', '".$post_params_field_array_data_value[5]."','0')";
 
 $query_run = mysqli_query($connection, $query_push_new_collector);
-header("Location: ../admin_usermanagement.php");
+// header("Location: ../admin_usermanagement.php");
 
 
 

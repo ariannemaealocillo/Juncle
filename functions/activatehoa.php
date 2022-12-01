@@ -2,7 +2,7 @@
 require '../database.php';
 
 $post_params_field_array = array(
-    "activate_id",//0
+    "activate_hoa_id",//0
   
     );
     ?>
@@ -23,7 +23,7 @@ for($i = 0;$i < sizeof($post_params_field_array); $i++){
 <!-- For Console Debugging -->
 <script>
 console.log("<?php echo $post_params_field_array[$i].' is Set.'; ?>");
-console.log('collector Value: ' + "<?php echo $_POST[(String)$post_params_field_array[$i]]; ?>");
+console.log('Admin Value: ' + "<?php echo $_POST[(String)$post_params_field_array[$i]]; ?>");
 </script>
 
 
@@ -38,9 +38,9 @@ console.log('collector Value: ' + "<?php echo $_POST[(String)$post_params_field_
 
 
 
-$query_push_activate_collector = "UPDATE collector
-SET account_status  = '1' where collector_id = '".$post_params_field_array_data_value[0]."'";
+$query_push_activate_admin = "UPDATE user
+SET status  = '0' where user_id = '".$post_params_field_array_data_value[0]."'";
 
-$query_run = mysqli_query($connection, $query_push_activate_collector);
+$query_run = mysqli_query($connection, $query_push_activate_admin);
 // header("Location: ../admin_usermanagement.php");
 ?>
